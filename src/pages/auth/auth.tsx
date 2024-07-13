@@ -20,12 +20,12 @@ const CreateAccount = (props: Props) => {
   const { func } = props;
 
   return (
-    <Typography variant='body2' align='center'>
+    <Typography variant='body2' align='center' color='text.primary'>
       Don't have a account!{" "}
       <Typography
         variant='body1'
         className='cursor-pointer'
-        color='primary.main'
+        color='primary.dark'
         onClick={() => {
           func(AUTH_TYPE.SIGN_UP);
         }}
@@ -45,7 +45,7 @@ const AlreadyHaveAnAccount = (props: Props) => {
       <Typography
         variant='body1'
         className='cursor-pointer'
-        color='primary.main'
+        color='primary.dark'
         onClick={() => {
           func(AUTH_TYPE.LOGIN);
         }}
@@ -86,6 +86,9 @@ const Auth = () => {
           <Typography
             variant='h6'
             className='uppercase text-white font-medium text-lg'
+            style={{
+              fontSize: "14px",
+            }}
           >
             Chat App
           </Typography>
