@@ -24,6 +24,7 @@ const CreateAccount = (props: Props) => {
       Don't have a account!{" "}
       <Typography
         variant='body1'
+        component='span'
         className='cursor-pointer'
         color='primary.dark'
         onClick={() => {
@@ -40,10 +41,11 @@ const AlreadyHaveAnAccount = (props: Props) => {
   const { func } = props;
 
   return (
-    <Typography variant='body2' align='center'>
+    <Typography variant='body2' align='center' color='text.primary'>
       Already have an account!{" "}
       <Typography
         variant='body1'
+        component='span'
         className='cursor-pointer'
         color='primary.dark'
         onClick={() => {

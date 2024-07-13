@@ -17,6 +17,7 @@ const AuthLoading = () => {
           setAuth({
             authenticated: true,
             user: res.data.data,
+            loading: false,
           })
         );
       })

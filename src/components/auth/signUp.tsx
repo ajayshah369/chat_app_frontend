@@ -7,9 +7,26 @@ import {
 } from "@mui/material";
 import { FormEvent, useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { useDispatch } from "react-redux";
+
+import axiosInstance from "../../utilities/axiosInstance";
+import { set as setAuth } from "../../store/authSlice";
+import { set as setSnackbar } from "../../store/snackbarSlice";
+
+type SignUpData = {
+  email: string;
+  password: string;
+  name: string;
+};
 
 const SignUp = () => {
+  const dispatch = useDispatch();
+
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const toggleShowPassword = () => {
     setShowPassword((prev) => {
@@ -17,8 +34,55 @@ const SignUp = () => {
     });
   };
 
+  const signUp = (data: SignUpData) => {
+    setLoading(true);
+
+    axiosInstance
+      .post("/auth/signUp", data)
+      .then((res) => {
+        dispatch(
+          setAuth({
+            authenticated: true,
+            user: res.data.data,
+          })
+        );
+
+        dispatch(
+          setSnackbar({
+            message: res?.data?.message ?? "Success!",
+            open: true,
+            severity: "success",
+            autoHideDuration: 1000,
+          })
+        );
+      })
+      .catch((err) => {
+        dispatch(
+          setSnackbar({
+            message: err?.response?.data?.message ?? "Something went wrong!",
+            open: true,
+            severity: "error",
+            autoHideDuration: 1000,
+          })
+        );
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   const submit = (event: FormEvent) => {
     event.preventDefault();
+
+    if (loading) return;
+
+    const data: SignUpData = {
+      email: email,
+      password: password,
+      name: name,
+    };
+
+    signUp(data);
   };
 
   return (
@@ -44,6 +108,10 @@ const SignUp = () => {
           label='Email'
           size='small'
           fullWidth
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
         />
         <TextField
           name='password'
@@ -62,6 +130,23 @@ const SignUp = () => {
                 {showPassword ? <VisibilityOff /> : <Visibility />}
               </InputAdornment>
             ),
+          }}
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+        />
+
+        <TextField
+          name='name'
+          required
+          type='name'
+          label='Name'
+          size='small'
+          fullWidth
+          value={name}
+          onChange={(e) => {
+            setName(e.target.value);
           }}
         />
 
