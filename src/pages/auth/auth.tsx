@@ -1,11 +1,64 @@
 import { Box, Typography, ThemeProvider } from "@mui/material";
+import { useState, JSX } from "react";
 
 import { lightTheme } from "../../assets/themes";
 
 import logo from "../../assets/logo.svg";
-import SignUp from "./signUp";
+import Login from "../../components/auth/login";
+import SignUp from "../../components/auth/signUp";
+
+enum AUTH_TYPE {
+  LOGIN = "login",
+  SIGN_UP = "signUp",
+}
+
+type Props = {
+  func: React.Dispatch<React.SetStateAction<AUTH_TYPE>>;
+};
+
+const CreateAccount = (props: Props) => {
+  const { func } = props;
+
+  return (
+    <Typography variant='body2' align='center'>
+      Don't have a account!{" "}
+      <Typography
+        variant='body1'
+        className='cursor-pointer'
+        color='primary.main'
+        onClick={() => {
+          func(AUTH_TYPE.SIGN_UP);
+        }}
+      >
+        Create Account.
+      </Typography>
+    </Typography>
+  );
+};
+
+const AlreadyHaveAnAccount = (props: Props) => {
+  const { func } = props;
+
+  return (
+    <Typography variant='body2' align='center'>
+      Already have an account!{" "}
+      <Typography
+        variant='body1'
+        className='cursor-pointer'
+        color='primary.main'
+        onClick={() => {
+          func(AUTH_TYPE.LOGIN);
+        }}
+      >
+        Login.
+      </Typography>
+    </Typography>
+  );
+};
 
 const Auth = () => {
+  const [authType, setAuthType] = useState<AUTH_TYPE>(AUTH_TYPE.LOGIN);
+
   return (
     <Box
       component='div'
@@ -51,7 +104,34 @@ const Auth = () => {
         }}
       >
         <ThemeProvider theme={lightTheme}>
-          <SignUp />
+          <Box
+            component='div'
+            className='flex flex-col justify-center items-stretch !w-full'
+          >
+            {((): JSX.Element => {
+              switch (authType) {
+                case AUTH_TYPE.LOGIN:
+                  return <Login />;
+                case AUTH_TYPE.SIGN_UP:
+                  return <SignUp />;
+                default:
+                  return <></>;
+              }
+            })()}
+
+            <Box component='div' className='flex justify-center'>
+              {((): JSX.Element => {
+                switch (authType) {
+                  case AUTH_TYPE.LOGIN:
+                    return <CreateAccount func={setAuthType} />;
+                  case AUTH_TYPE.SIGN_UP:
+                    return <AlreadyHaveAnAccount func={setAuthType} />;
+                  default:
+                    return <></>;
+                }
+              })()}
+            </Box>
+          </Box>
         </ThemeProvider>
 
         <Box component='div' bgcolor='secondary.light'></Box>

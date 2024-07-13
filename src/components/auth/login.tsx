@@ -9,7 +9,7 @@ import { FormEvent, useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const Login = () => {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const toggleShowPassword = () => {
     setShowPassword((prev) => {
