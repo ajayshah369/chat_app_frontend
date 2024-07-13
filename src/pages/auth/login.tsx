@@ -1,4 +1,10 @@
-import { Button, InputAdornment, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  InputAdornment,
+  TextField,
+  Typography,
+  Box,
+} from "@mui/material";
 import { FormEvent, useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
@@ -16,12 +22,14 @@ const Login = () => {
   };
 
   return (
-    <div className='p-8 flex flex-col items-center justify-center gap-8'>
-      <Typography variant='h4' component='h2'>
-        Login
-      </Typography>
+    <Box
+      component='div'
+      className='p-8 flex flex-col items-center justify-center gap-8'
+    >
+      <Typography variant='h5'>Login</Typography>
 
-      <form
+      <Box
+        component='form'
         onSubmit={submit}
         className='flex flex-col items-center gap-8'
         style={{
@@ -69,8 +77,8 @@ const Login = () => {
         >
           Submit
         </Button>
-      </form>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

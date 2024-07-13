@@ -1,22 +1,27 @@
+import { Box, Typography, ThemeProvider } from "@mui/material";
+
+import { lightTheme } from "../../assets/themes";
+
 import logo from "../../assets/logo.svg";
 import SignUp from "./signUp";
 
 const Auth = () => {
   return (
-    <div
+    <Box
+      component='div'
       className='h-screen relative overflow-auto'
-      style={{
-        backgroundColor: "#111b21",
-      }}
+      bgcolor='background.default'
     >
-      <div
+      <Box
+        component='div'
         style={{
           height: "240px",
-          backgroundColor: "#00a884",
           padding: "2rem 0",
         }}
+        bgcolor='primary.main'
       >
-        <div
+        <Box
+          component='div'
           className='flex items-center gap-2'
           style={{
             width: "90%",
@@ -24,12 +29,18 @@ const Auth = () => {
             height: "40px",
           }}
         >
-          <img alt='Logo' src={logo} />
-          <p className='uppercase text-white font-medium text-lg'>Chat App</p>
-        </div>
-      </div>
+          <Box component='img' alt='Logo' src={logo} />
+          <Typography
+            variant='h6'
+            className='uppercase text-white font-medium text-lg'
+          >
+            Chat App
+          </Typography>
+        </Box>
+      </Box>
 
-      <div
+      <Box
+        component='div'
         className='bg-white rounded absolute grid grid-rows-1 grid-cols-2 overflow-hidden'
         style={{
           height: "calc(100vh - 6rem - 40px)",
@@ -39,10 +50,13 @@ const Auth = () => {
           left: "5%",
         }}
       >
-        <SignUp />
-        <div className='bg-red-200'></div>
-      </div>
-    </div>
+        <ThemeProvider theme={lightTheme}>
+          <SignUp />
+        </ThemeProvider>
+
+        <Box component='div' bgcolor='secondary.light'></Box>
+      </Box>
+    </Box>
   );
 };
 
