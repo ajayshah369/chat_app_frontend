@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 
 import { RootState } from "./store/index";
 import { darkTheme } from "./assets/themes";
+import Snackbar from "./components/snackbar";
 import AuthLoading from "./pages/auth/authLoading";
 import Auth from "./pages/auth/auth";
 
@@ -27,6 +28,7 @@ function App() {
 
   return (
     <ThemeProvider theme={darkTheme}>
+      <Snackbar />
       <RouterProvider router={router} />
     </ThemeProvider>
   );

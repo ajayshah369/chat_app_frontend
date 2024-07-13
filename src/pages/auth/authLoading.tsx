@@ -2,20 +2,46 @@ import { Box, Typography, LinearProgress } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
+import axiosInstance from "../../utilities/axiosInstance";
 import { set as setAuth } from "../../store/authSlice";
+import { set as setSnackbar } from "../../store/snackbarSlice";
 
 const AuthLoading = () => {
   const dispatch = useDispatch();
 
+  const getMe = () => {
+    axiosInstance
+      .get("/user")
+      .then((res) => {
+        dispatch(
+          setAuth({
+            authenticated: true,
+            user: res.data.data,
+          })
+        );
+      })
+      .catch((err) => {
+        dispatch(
+          setAuth({
+            loading: false,
+          })
+        );
+
+        dispatch(
+          setSnackbar({
+            message: err?.response?.data?.message ?? "Something went wrong!",
+            open: true,
+            severity: "error",
+            autoHideDuration: 1000,
+          })
+        );
+      });
+  };
+
   useEffect(() => {
-    setTimeout(() => {
-      dispatch(
-        setAuth({
-          loading: false,
-        })
-      );
-    }, 3000);
-  }, [dispatch]);
+    getMe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Box
