@@ -2,7 +2,14 @@ import { Box } from "@mui/material";
 
 const Home = () => {
   return (
-    <Box component='div' className='h-screen overflow-auto' id='app'></Box>
+    <Box component='div' className='overflow-auto' id='app'>
+      <Box
+        id='main'
+        component='div'
+        className='overflow-auto'
+        bgcolor='background.default'
+      ></Box>
+    </Box>
   );
 };
 
