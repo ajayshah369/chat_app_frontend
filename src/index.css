@@ -7,6 +7,16 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --splashscreen-startup-background: #111b21;
+  --splashscreen-startup-icon: #676f73;
+  --splashscreen-primary-title: rgba(233, 237, 239, 0.88);
+  --splashscreen-secondary-lighter: #667781;
+  --splashscreen-progress-primary: #0b846d;
+  --splashscreen-progress-background: #233138;
+
+  --app-background: #0c1317;
+  --app-background-deeper: #0a1014;
 }
 
 @tailwind base;
@@ -19,4 +29,11 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+
+#app {
+  background: linear-gradient(
+    var(--app-background),
+    var(--app-background-deeper)
+  );
 }

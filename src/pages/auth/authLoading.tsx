@@ -47,13 +47,15 @@ const AuthLoading = () => {
   return (
     <Box
       component='div'
-      bgcolor='background.default'
       className='h-screen flex flex-col items-center justify-center'
+      style={{
+        backgroundColor: "var(--splashscreen-startup-background)",
+      }}
     >
       <Box
         component='div'
         style={{
-          color: "#676f73",
+          color: "var(--splashscreen-startup-icon)",
           transform: "translate(calc(50% - 52px / 2))",
           marginBottom: "3rem",
         }}
@@ -68,8 +70,8 @@ const AuthLoading = () => {
 
       <LinearProgress
         style={{
-          color: "#0b846d",
-          backgroundColor: "#233138",
+          color: "var(--splashscreen-progress-primary)",
+          backgroundColor: "var(--splashscreen-progress-background)",
           width: "90%",
           maxWidth: "280px",
           height: "3px",
@@ -81,7 +83,7 @@ const AuthLoading = () => {
         paragraph
         style={{
           fontSize: "17px",
-          color: "rgba(233, 237, 239, 0.88)",
+          color: "var(--splashscreen-primary-title)",
           marginBottom: "0",
         }}
       >
@@ -91,7 +93,10 @@ const AuthLoading = () => {
       <Box
         component='div'
         className='flex items-center'
-        style={{ color: "#667781", fontSize: "14px" }}
+        style={{
+          color: "var(--splashscreen-secondary-lighter)",
+          fontSize: "14px",
+        }}
       >
         <span>
           <svg width='10' height='12' xmlns='http://www.w3.org/2000/svg'>
