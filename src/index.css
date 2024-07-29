@@ -54,9 +54,9 @@
 
 @media (min-width: 1450px) {
   #main {
-    height: calc(100% - 2.5rem);
-    width: calc(100% - 2.5rem);
-    margin: 1.25rem auto;
+    height: calc(100% - 2.4rem);
+    width: calc(100% - 2.4rem);
+    margin: 1.2rem auto;
   }
 }
 
@@ -71,6 +71,13 @@
   #tab-1 {
     flex: 0 0 40%;
     max-width: 40%;
+  }
+}
+
+@media (max-width: 900px) {
+  #tab-1 {
+    flex: 0 0 45%;
+    max-width: 45%;
   }
 }
 

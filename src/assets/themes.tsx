@@ -70,10 +70,12 @@ export const appDarkTheme = createTheme({
       main: "#202c33",
       light: "#2a3942",
       dark: "#1d282f",
+      contrastText: "#222e35",
     },
     text: {
       primary: "#e9edef",
       secondary: "#8696a0",
+      disabled: "#667781",
     },
     divider: "rgba(134, 150, 160, .15)",
     icon: {
