@@ -6,7 +6,7 @@ const Home = () => {
       <Box
         id='main'
         component='div'
-        className='overflow-auto'
+        className='overflow-auto flex'
         bgcolor='background.default'
       ></Box>
     </Box>
