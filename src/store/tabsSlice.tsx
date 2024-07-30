@@ -5,6 +5,7 @@ export enum TAB1_TYPE {
   STATUS = "status",
   SETTINGS = "settings",
   PROFILE = "profile",
+  NEW_CHAT = "newChat",
 }
 
 enum TAB2_TYPE {
