@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-enum TAB1_TYPE {
+export enum TAB1_TYPE {
   CHATS = "chats",
   STATUS = "status",
   SETTINGS = "settings",

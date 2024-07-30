@@ -7,6 +7,8 @@ import StatusIcon from "../assets/icons/status.svg?react";
 import SettingsIcon from "../assets/icons/settings.svg?react";
 import ProfileIcon from "../assets/icons/profile.svg?react";
 
+import { TAB1_TYPE } from "../store/tabsSlice";
+
 const NavBar = () => {
   return (
     <Box
@@ -20,8 +22,8 @@ const NavBar = () => {
       borderColor='divider'
     >
       <Box component='div'>
-        <NavItem tooltip='Chats' Icon={ChatIcon} active={true} />
-        <NavItem tooltip='Status' Icon={StatusIcon} />
+        <NavItem tooltip='Chats' Icon={ChatIcon} tab={TAB1_TYPE.CHATS} />
+        <NavItem tooltip='Status' Icon={StatusIcon} tab={TAB1_TYPE.STATUS} />
       </Box>
 
       <Box component='div' className='flex-grow flex-shrink-0'></Box>
@@ -32,8 +34,12 @@ const NavBar = () => {
           marginBottom: "10px",
         }}
       >
-        <NavItem tooltip='Settings' Icon={SettingsIcon} />
-        <NavItem tooltip='Profile' Icon={ProfileIcon} />
+        <NavItem
+          tooltip='Settings'
+          Icon={SettingsIcon}
+          tab={TAB1_TYPE.SETTINGS}
+        />
+        <NavItem tooltip='Profile' Icon={ProfileIcon} tab={TAB1_TYPE.PROFILE} />
       </Box>
     </Box>
   );

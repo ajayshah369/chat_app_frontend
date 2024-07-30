@@ -6,6 +6,10 @@ import {
   tooltipClasses,
   Typography,
 } from "@mui/material";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../store/index";
+
+import { TAB1_TYPE as TAB, set as setTabs } from "../store/tabsSlice";
 
 const CustomTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -23,11 +27,22 @@ type Props = {
   tooltip: string;
   Icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
   count?: number;
-  active?: boolean;
+  tab: TAB;
 };
 
 const NavItem = (props: Props) => {
-  const { tooltip, Icon, count, active } = props;
+  const { tooltip, Icon, count, tab } = props;
+  const dispatch = useDispatch();
+  const activeTab1 = useSelector((state: RootState) => state.tabs.activeTab1);
+  const active: boolean = tab === activeTab1;
+
+  const selectTab = () => {
+    dispatch(
+      setTabs({
+        activeTab1: tab,
+      })
+    );
+  };
 
   return (
     <CustomTooltip title={tooltip} placement='right'>
@@ -43,6 +58,7 @@ const NavItem = (props: Props) => {
         }}
         className='!aspect-square w-full flex items-center justify-center relative cursor-pointer'
         color='icon.main'
+        onClick={selectTab}
       >
         <Icon />
         {count ? (
