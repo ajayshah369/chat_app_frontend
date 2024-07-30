@@ -33,7 +33,7 @@ const NavBar = () => {
         }}
       >
         <NavItem tooltip='Settings' Icon={SettingsIcon} />
-        <NavItem tooltip='Settings' Icon={ProfileIcon} />
+        <NavItem tooltip='Profile' Icon={ProfileIcon} />
       </Box>
     </Box>
   );

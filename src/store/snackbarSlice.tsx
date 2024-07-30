@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { AlertPropsColorOverrides, AlertColor } from "@mui/material";
 import { OverridableStringUnion } from "@mui/types";
 
-interface StateInterface {
+interface Interface {
   message?: string | null;
   autoHideDuration?: number;
   open?: boolean;
@@ -11,7 +11,7 @@ interface StateInterface {
     | undefined;
 }
 
-export type InitialState = {
+type State = {
   message: string | null;
   autoHideDuration: number;
   open: boolean;
@@ -20,7 +20,7 @@ export type InitialState = {
     | undefined;
 };
 
-const initialState: InitialState = {
+const initialState: State = {
   message: null,
   autoHideDuration: 3000,
   open: false,
@@ -32,9 +32,9 @@ const snackbarSlice = createSlice({
   initialState: initialState,
   reducers: {
     set: (
-      state: InitialState,
+      state: State,
       action: {
-        payload: StateInterface;
+        payload: Interface;
       }
     ) => ({
       ...state,

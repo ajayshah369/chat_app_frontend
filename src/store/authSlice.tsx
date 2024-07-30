@@ -1,18 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export type InitialState = {
+type State = {
   authenticated: boolean;
   loading: boolean;
   user: Record<string, unknown> | null;
 };
 
-interface StateInterface {
+interface Interface {
   authenticated?: boolean;
   loading?: boolean;
   user?: Record<string, unknown> | null;
 }
 
-const initialState: InitialState = {
+const initialState: State = {
   authenticated: false,
   loading: true,
   user: null,
@@ -23,9 +23,9 @@ const authSlice = createSlice({
   initialState: initialState,
   reducers: {
     set: (
-      state: InitialState,
+      state: State,
       action: {
-        payload: StateInterface;
+        payload: Interface;
       }
     ) => ({
       ...state,
