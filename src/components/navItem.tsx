@@ -32,18 +32,18 @@ const CustomTooltip1 = styled(({ className, ...props }: TooltipProps) => (
   },
 }));
 
-const CustomTooltip2 = styled(({ className, ...props }: TooltipProps) => (
-  <Tooltip {...props} classes={{ popper: className }} />
-))(({ theme }) => ({
-  [`& .${tooltipClasses.tooltip}`]: {
-    color: theme.palette.text.primary,
-    borderRadius: "0",
-    fontSize: "11px",
-    fontWeight: "300",
-    backgroundColor: theme.palette.background.paper,
-    border: `0.5px solid ${theme.palette.divider}`,
-  },
-}));
+// const CustomTooltip2 = styled(({ className, ...props }: TooltipProps) => (
+//   <Tooltip {...props} classes={{ popper: className }} />
+// ))(({ theme }) => ({
+//   [`& .${tooltipClasses.tooltip}`]: {
+//     color: theme.palette.text.primary,
+//     borderRadius: "0",
+//     fontSize: "11px",
+//     fontWeight: "300",
+//     backgroundColor: theme.palette.background.paper,
+//     border: `0.5px solid ${theme.palette.divider}`,
+//   },
+// }));
 
 type Props = {
   tooltip: string;
@@ -78,24 +78,7 @@ const NavItem = (props: Props) => {
             {children}
           </CustomTooltip1>
         ) : (
-          <CustomTooltip2
-            title={tooltip}
-            placement={tooltipPlacement}
-            slotProps={{
-              popper: {
-                modifiers: [
-                  {
-                    name: "offset",
-                    options: {
-                      offset: [20, -14],
-                    },
-                  },
-                ],
-              },
-            }}
-          >
-            {children}
-          </CustomTooltip2>
+          <>{children}</>
         )
       }
     >

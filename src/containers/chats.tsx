@@ -3,6 +3,7 @@ import { Box, Typography } from "@mui/material";
 import NavItem from "../components/navItem";
 import NewIcon from "../assets/icons/new.svg?react";
 import { TAB1_TYPE } from "../store/tabsSlice";
+import VerticalMoreButton from "../components/verticalMoreButton";
 
 const Chats = () => {
   return (
@@ -33,6 +34,14 @@ const Chats = () => {
             Icon={NewIcon}
             tab={TAB1_TYPE.NEW_CHAT}
             inNavBar={false}
+          />
+
+          <VerticalMoreButton
+            list={[
+              { text: "New group" },
+              { text: "Starred messages" },
+              { text: "Log out" },
+            ]}
           />
         </Box>
       </Box>
