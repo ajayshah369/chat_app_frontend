@@ -74,7 +74,7 @@ const CustomTooltip = styled(({ className, ...props }: TooltipProps) => (
   },
 }));
 
-const VerticalMoreButton = ({ list = [] }: ListProps) => {
+export const VerticalMoreButton = ({ list = [] }: ListProps) => {
   const [open, setOpen] = useState<boolean>(false);
 
   const handleTooltipClose = () => {
@@ -132,5 +132,3 @@ const VerticalMoreButton = ({ list = [] }: ListProps) => {
     </ClickAwayListener>
   );
 };
-
-export default VerticalMoreButton;

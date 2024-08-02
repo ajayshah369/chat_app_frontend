@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 import NavItem from "../components/navItem";
 import NewIcon from "../assets/icons/new.svg?react";
 import { TAB1_TYPE } from "../store/tabsSlice";
-import VerticalMoreButton from "../components/verticalMoreButton";
+import { VerticalMoreButton } from "../components/tooltipOptionsButtons";
 import SearchBox from "./searchBox";
 
 const ChatsHeader = () => {
