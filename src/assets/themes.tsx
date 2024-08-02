@@ -85,6 +85,7 @@ export const appDarkTheme = createTheme({
       dark: "#8696a0",
     },
     action: {},
+    common: {},
   },
   typography: {
     allVariants: {

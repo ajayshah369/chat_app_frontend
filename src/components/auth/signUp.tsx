@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import axiosInstance from "../../utilities/axiosInstance";
 import { set as setAuth } from "../../store/authSlice";
 import { set as setSnackbar } from "../../store/snackbarSlice";
+import Spinner from "../spinner";
 
 type SignUpData = {
   email: string;
@@ -160,7 +161,7 @@ const SignUp = () => {
             width: "90%",
           }}
         >
-          Submit
+          {loading ? <Spinner /> : "Submit"}
         </Button>
       </Box>
     </Box>
