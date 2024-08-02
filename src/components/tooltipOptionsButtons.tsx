@@ -12,6 +12,7 @@ import {
 import { useState } from "react";
 
 import VerticalMoreIcon from "../assets/icons/moreVertical.svg?react";
+import FilterListIcon from "../assets/icons/filterList.svg?react";
 
 type ListItemProps = {
   text: string;
@@ -36,8 +37,9 @@ const ListItem = ({ text }: ListItemProps) => {
     >
       <ListItemText
         style={{
-          fontSize: "14.5px",
-          lineHeight: "14.5px",
+          fontSize: "14px",
+          lineHeight: "14px",
+          fontWeight: 300,
         }}
         disableTypography
       >
@@ -130,5 +132,22 @@ export const VerticalMoreButton = ({ list = [] }: ListProps) => {
         </CustomTooltip>
       </Box>
     </ClickAwayListener>
+  );
+};
+
+export const Filter = () => {
+  return (
+    <Box
+      component='div'
+      style={{
+        margin: "0 8px",
+        height: "26px",
+        width: "26px",
+      }}
+      className='cursor-pointer flex items-center justify-center'
+      color='icon.dark'
+    >
+      <FilterListIcon />
+    </Box>
   );
 };

@@ -9,7 +9,7 @@ import { Box, InputBase } from "@mui/material";
 import CrossIcon from "../assets/icons/cross.svg?react";
 import SearchIcon from "../assets/icons/search.svg?react";
 import BackArrowIcon from "../assets/icons/backArrow.svg?react";
-import Filter from "../components/filter";
+import { Filter } from "../components/tooltipOptionsButtons";
 
 type SearchInputProps = {
   setFocused: React.Dispatch<React.SetStateAction<boolean>>;
