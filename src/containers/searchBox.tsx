@@ -10,6 +10,8 @@ import CrossIcon from "../assets/icons/cross.svg?react";
 import SearchIcon from "../assets/icons/search.svg?react";
 import BackArrowIcon from "../assets/icons/backArrow.svg?react";
 import { Filter } from "../components/tooltipOptionsButtons";
+import UnreadChatsIcon from "../assets/icons/unreadChats.svg?react";
+import GroupIcon from "../assets/icons/group.svg?react";
 
 type SearchInputProps = {
   setFocused: React.Dispatch<React.SetStateAction<boolean>>;
@@ -210,7 +212,12 @@ const SearchBox = () => {
         />
       </Box>
 
-      <Filter />
+      <Filter
+        list={[
+          { text: "Unread chats", Icon: UnreadChatsIcon },
+          { text: "Groups", Icon: GroupIcon },
+        ]}
+      />
     </Box>
   );
 };
