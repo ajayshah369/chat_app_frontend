@@ -31,7 +31,7 @@ const ChatsHeader = () => {
         style={{
           fontSize: "22px",
         }}
-        color='white'
+        color='text.primary'
       >
         Chats
       </Typography>
