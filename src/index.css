@@ -17,6 +17,12 @@
 
   --app-background: #0c1317;
   --app-background-deeper: #0a1014;
+
+  --modal-backdrop: rgba(11, 20, 26, 0.85);
+  --modal-background: #3b4a54;
+
+  --button-secondary-border: rgba(134, 150, 160, 0.15);
+  --shadow-rgb: rgb(11, 20, 26);
 }
 
 @tailwind base;

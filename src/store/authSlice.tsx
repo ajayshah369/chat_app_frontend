@@ -4,6 +4,7 @@ type State = {
   authenticated: boolean;
   loading: boolean;
   user: Record<string, unknown> | null;
+  showLogoutDialog: boolean;
 };
 
 interface Interface {
@@ -16,6 +17,7 @@ const initialState: State = {
   authenticated: false,
   loading: true,
   user: null,
+  showLogoutDialog: false,
 };
 
 const authSlice = createSlice({
@@ -27,16 +29,26 @@ const authSlice = createSlice({
       action: {
         payload: Interface;
       }
-    ) => ({
+    ): State => ({
       ...state,
       ...action.payload,
     }),
-    reset: () => ({
+    setLogoutModal: (
+      state: State,
+      action: {
+        payload: boolean;
+      }
+    ): State => ({
+      ...state,
+      showLogoutDialog: action.payload,
+    }),
+    reset: (): State => ({
       ...initialState,
+      loading: false,
     }),
   },
 });
 
-export const { set } = authSlice.actions;
+export const { set, reset, setLogoutModal } = authSlice.actions;
 
 export default authSlice.reducer;

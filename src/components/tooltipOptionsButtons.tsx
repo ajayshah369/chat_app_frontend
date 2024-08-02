@@ -21,27 +21,33 @@ enum Size {
   SMALL = "small",
 }
 
-type ListItemProps = {
+interface ListItemType {
   text: string;
   Icon?: React.FunctionComponent<
     React.SVGProps<SVGSVGElement> & {
       title?: string;
     }
   >;
+  action?: () => void;
+}
+
+interface ListItemPropsType extends ListItemType {
   size?: Size;
-};
+  handleTooltipToggle?: () => void;
+}
 
-type ListType = {
-  list: ListItemProps[];
-};
+interface ListType {
+  list: ListItemType[];
+}
 
-type ListProps = {
-  list: ListItemProps[];
+interface ListPropsType {
+  list: ListItemPropsType[];
   title?: string;
   size?: Size;
-};
+  handleTooltipToggle: () => void;
+}
 
-const ListTitle = ({ text }: ListItemProps) => {
+const ListTitle = ({ text }: { text: string }) => {
   return (
     <ListSubheader
       sx={{
@@ -62,7 +68,13 @@ const ListTitle = ({ text }: ListItemProps) => {
   );
 };
 
-const ListItem = ({ text, size, Icon }: ListItemProps) => {
+const ListItem = ({
+  text,
+  size,
+  Icon,
+  action,
+  handleTooltipToggle,
+}: ListItemPropsType) => {
   return (
     <MUIListItem
       sx={{
@@ -74,6 +86,10 @@ const ListItem = ({ text, size, Icon }: ListItemProps) => {
           bgcolor: "background.paper",
         },
         gap: 1,
+      }}
+      onClick={() => {
+        handleTooltipToggle?.();
+        action?.();
       }}
     >
       {Icon ? (
@@ -101,7 +117,12 @@ const ListItem = ({ text, size, Icon }: ListItemProps) => {
   );
 };
 
-const List = ({ list, title, size = Size.NORMAL }: ListProps) => {
+const List = ({
+  list,
+  title,
+  size = Size.NORMAL,
+  handleTooltipToggle,
+}: ListPropsType) => {
   return (
     <MUIList
       component='div'
@@ -111,8 +132,17 @@ const List = ({ list, title, size = Size.NORMAL }: ListProps) => {
       }}
     >
       {title ? <ListTitle text={title} /> : null}
-      {list.map((e) => {
-        return <ListItem text={e.text} Icon={e.Icon} size={size} />;
+      {list.map((e, index) => {
+        return (
+          <ListItem
+            key={e.text + index}
+            text={e.text}
+            Icon={e.Icon}
+            size={size}
+            action={e.action}
+            handleTooltipToggle={handleTooltipToggle}
+          />
+        );
       })}
     </MUIList>
   );
@@ -146,7 +176,7 @@ export const VerticalMoreButton = ({ list }: ListType) => {
     <ClickAwayListener onClickAway={handleTooltipClose}>
       <Box component='div'>
         <CustomTooltip
-          title={<List list={list} />}
+          title={<List list={list} handleTooltipToggle={handleTooltipToggle} />}
           placement='bottom-end'
           slotProps={{
             popper: {
@@ -205,7 +235,14 @@ export const Filter = ({ list }: ListType) => {
     <ClickAwayListener onClickAway={handleTooltipClose}>
       <Box component='div'>
         <CustomTooltip
-          title={<List list={list} title='Chats' size={Size.SMALL} />}
+          title={
+            <List
+              list={list}
+              title='Chats'
+              size={Size.SMALL}
+              handleTooltipToggle={handleTooltipToggle}
+            />
+          }
           placement='bottom-start'
           slotProps={{
             popper: {

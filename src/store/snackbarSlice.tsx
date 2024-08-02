@@ -36,11 +36,11 @@ const snackbarSlice = createSlice({
       action: {
         payload: Interface;
       }
-    ) => ({
+    ): State => ({
       ...state,
       ...action.payload,
     }),
-    reset: () => ({
+    reset: (): State => ({
       ...initialState,
     }),
   },

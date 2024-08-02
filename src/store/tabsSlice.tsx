@@ -30,13 +30,16 @@ const tabsSlice = createSlice({
       action: {
         payload: State;
       }
-    ) => ({
+    ): State => ({
       ...state,
       ...action.payload,
+    }),
+    reset: (): State => ({
+      ...initialState,
     }),
   },
 });
 
-export const { set } = tabsSlice.actions;
+export const { set, reset } = tabsSlice.actions;
 
 export default tabsSlice.reducer;

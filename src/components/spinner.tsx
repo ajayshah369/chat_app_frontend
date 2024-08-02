@@ -1,11 +1,16 @@
 import { CircularProgress } from "@mui/material";
 
-const Spinner = () => {
+type Props = {
+  color?: string;
+  size?: number;
+};
+
+const Spinner = ({ color, size }: Props) => {
   return (
     <CircularProgress
-      size={24}
+      size={size ? size : 24}
       sx={{
-        color: "common.white",
+        color: color ? color : "common.white",
       }}
     />
   );

@@ -1,12 +1,20 @@
 import { Box, Typography } from "@mui/material";
+import { useDispatch } from "react-redux";
 
 import NavItem from "../components/navItem";
 import NewIcon from "../assets/icons/new.svg?react";
 import { TAB1_TYPE } from "../store/tabsSlice";
 import { VerticalMoreButton } from "../components/tooltipOptionsButtons";
 import SearchBox from "./searchBox";
+import { setLogoutModal } from "../store/authSlice";
 
 const ChatsHeader = () => {
+  const dispatch = useDispatch();
+
+  const openLogoutModal = () => {
+    dispatch(setLogoutModal(true));
+  };
+
   return (
     <Box
       component='header'
@@ -40,7 +48,7 @@ const ChatsHeader = () => {
           list={[
             { text: "New group" },
             { text: "Starred messages" },
-            { text: "Log out" },
+            { text: "Log out", action: openLogoutModal },
           ]}
         />
       </Box>

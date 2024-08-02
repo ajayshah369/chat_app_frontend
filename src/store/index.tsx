@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import authReducer from "./authSlice";
-import snackbarReducer from "./snackbarSlice";
-import tabsReducer from "./tabsSlice";
+import authReducer, { reset as resetAuth } from "./authSlice";
+import snackbarReducer, { reset as resetSnackbar } from "./snackbarSlice";
+import tabsReducer, { reset as resetTab } from "./tabsSlice";
 
 const store = configureStore({
   reducer: {
@@ -15,3 +15,9 @@ const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>;
 
 export default store;
+
+export const resetAll = () => {
+  store.dispatch(resetAuth());
+  store.dispatch(resetTab());
+  store.dispatch(resetSnackbar());
+};
