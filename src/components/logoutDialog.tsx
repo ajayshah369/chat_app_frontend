@@ -124,7 +124,8 @@ const LogoutDialog = () => {
           onClick={closeDialog}
           sx={{
             color: "primary.light",
-            border: "1px solid var(--button-secondary-border)",
+            border: "1px solid",
+            borderColor: "divider",
             bgcolor: "transparent",
             ":hover": {
               color: "primary.A400",
