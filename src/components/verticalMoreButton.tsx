@@ -56,9 +56,6 @@ const List = ({ list }: ListProps) => {
         bgcolor: "secondary.A400",
       }}
     >
-      {/* <ListItem text='New Group' />
-      <ListItem text='Starred Message' />
-      <ListItem text='Log Out' /> */}
       {list.map((e) => {
         return <ListItem text={e.text} />;
       })}
