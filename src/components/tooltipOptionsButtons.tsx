@@ -11,7 +11,13 @@ import {
   ListItemIcon,
   ListSubheader,
 } from "@mui/material";
-import { useState } from "react";
+import React, {
+  useImperativeHandle,
+  forwardRef,
+  useState,
+  useEffect,
+  useRef,
+} from "react";
 
 import VerticalMoreIcon from "../assets/icons/moreVertical.svg?react";
 import FilterListIcon from "../assets/icons/filterList.svg?react";
@@ -44,6 +50,19 @@ interface ListPropsType {
   list: ListItemPropsType[];
   title?: string;
   size?: Size;
+  handleTooltipToggle: () => void;
+}
+
+interface TooltipButtonPropsType extends ListType {
+  title?: string;
+  size?: Size;
+  children: JSX.Element;
+  setToolTipStatus?: (tooltipStatus: boolean) => void;
+  offset: [number, number];
+  placement: TooltipProps["placement"];
+}
+
+interface TooltipButtonRef {
   handleTooltipToggle: () => void;
 }
 
@@ -127,7 +146,7 @@ const List = ({
     <MUIList
       component='div'
       sx={{
-        width: size === Size.SMALL ? 160 : 240,
+        width: size === Size.SMALL ? 160 : 200,
         bgcolor: "secondary.A400",
       }}
     >
@@ -161,125 +180,151 @@ const CustomTooltip = styled(({ className, ...props }: TooltipProps) => (
   },
 }));
 
+const TooltipButton = forwardRef(
+  (
+    {
+      list,
+      size,
+      title,
+      children,
+      setToolTipStatus,
+      placement,
+      offset,
+    }: TooltipButtonPropsType,
+    ref
+  ) => {
+    const [open, setOpen] = useState<boolean>(false);
+
+    const handleTooltipClose = () => {
+      setOpen(false);
+    };
+
+    const handleTooltipToggle = () => {
+      setOpen((prev) => !prev);
+    };
+
+    useEffect(() => {
+      setToolTipStatus?.(open);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [open]);
+
+    useImperativeHandle(ref, () => ({
+      handleTooltipToggle() {
+        handleTooltipToggle();
+      },
+    }));
+
+    return (
+      <ClickAwayListener onClickAway={handleTooltipClose}>
+        <Box component='div'>
+          <CustomTooltip
+            title={
+              <List
+                list={list}
+                size={size}
+                title={title}
+                handleTooltipToggle={handleTooltipToggle}
+              />
+            }
+            placement={placement}
+            slotProps={{
+              popper: {
+                modifiers: [
+                  {
+                    name: "offset",
+                    options: {
+                      offset: offset,
+                    },
+                  },
+                ],
+              },
+            }}
+            PopperProps={{
+              disablePortal: true,
+            }}
+            open={open}
+            disableFocusListener
+            disableHoverListener
+            disableTouchListener
+            onClose={handleTooltipClose}
+          >
+            {children}
+          </CustomTooltip>
+        </Box>
+      </ClickAwayListener>
+    );
+  }
+);
+
 export const VerticalMoreButton = ({ list }: ListType) => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const handleTooltipClose = () => {
-    setOpen(false);
-  };
+  const childRef = useRef<TooltipButtonRef>();
 
   const handleTooltipToggle = () => {
-    setOpen((prev) => !prev);
+    if (childRef.current) {
+      childRef.current.handleTooltipToggle();
+    }
   };
 
   return (
-    <ClickAwayListener onClickAway={handleTooltipClose}>
-      <Box component='div'>
-        <CustomTooltip
-          title={<List list={list} handleTooltipToggle={handleTooltipToggle} />}
-          placement='bottom-end'
-          slotProps={{
-            popper: {
-              modifiers: [
-                {
-                  name: "offset",
-                  options: {
-                    offset: [0, -10],
-                  },
-                },
-              ],
-            },
-          }}
-          PopperProps={{
-            disablePortal: true,
-          }}
-          open={open}
-          disableFocusListener
-          disableHoverListener
-          disableTouchListener
-          onClose={handleTooltipClose}
-        >
-          <Box
-            component='div'
-            style={{
-              width: "40px",
-              height: "40px",
-              borderRadius: "50%",
-              marginLeft: "4px",
-              backgroundColor: open ? "rgba(255, 255, 255, .1)" : "transparent",
-            }}
-            className='flex items-center justify-center cursor-pointer'
-            color='icon.main'
-            onClick={handleTooltipToggle}
-          >
-            <VerticalMoreIcon />
-          </Box>
-        </CustomTooltip>
+    <TooltipButton
+      list={list}
+      setToolTipStatus={setOpen}
+      ref={childRef}
+      placement={"bottom-end"}
+      offset={[0, -10]}
+    >
+      <Box
+        component='div'
+        style={{
+          width: "40px",
+          height: "40px",
+          borderRadius: "50%",
+          marginLeft: "4px",
+          backgroundColor: open ? "rgba(255, 255, 255, .1)" : "transparent",
+        }}
+        className='flex items-center justify-center cursor-pointer'
+        color='icon.main'
+        onClick={handleTooltipToggle}
+      >
+        <VerticalMoreIcon />
       </Box>
-    </ClickAwayListener>
+    </TooltipButton>
   );
 };
 
 export const Filter = ({ list }: ListType) => {
-  const [open, setOpen] = useState<boolean>(false);
-
-  const handleTooltipClose = () => {
-    setOpen(false);
-  };
+  const childRef = useRef<TooltipButtonRef>();
 
   const handleTooltipToggle = () => {
-    setOpen((prev) => !prev);
+    if (childRef.current) {
+      childRef.current.handleTooltipToggle();
+    }
   };
 
   return (
-    <ClickAwayListener onClickAway={handleTooltipClose}>
-      <Box component='div'>
-        <CustomTooltip
-          title={
-            <List
-              list={list}
-              title='Chats'
-              size={Size.SMALL}
-              handleTooltipToggle={handleTooltipToggle}
-            />
-          }
-          placement='bottom-start'
-          slotProps={{
-            popper: {
-              modifiers: [
-                {
-                  name: "offset",
-                  options: {
-                    offset: [4, -14],
-                  },
-                },
-              ],
-            },
-          }}
-          PopperProps={{
-            disablePortal: true,
-          }}
-          open={open}
-          disableFocusListener
-          disableHoverListener
-          disableTouchListener
-          onClose={handleTooltipClose}
-        >
-          <Box
-            component='div'
-            style={{
-              margin: "0 8px",
-              height: "26px",
-              width: "26px",
-            }}
-            className='cursor-pointer flex items-center justify-center'
-            color='icon.dark'
-            onClick={handleTooltipToggle}
-          >
-            <FilterListIcon />
-          </Box>
-        </CustomTooltip>
+    <TooltipButton
+      list={list}
+      size={Size.SMALL}
+      title='Chats'
+      ref={childRef}
+      placement='bottom-start'
+      offset={[4, -14]}
+    >
+      <Box
+        component='div'
+        style={{
+          margin: "0 8px",
+          height: "26px",
+          width: "26px",
+        }}
+        className='cursor-pointer flex items-center justify-center'
+        color='icon.dark'
+        onClick={handleTooltipToggle}
+      >
+        <FilterListIcon />
       </Box>
-    </ClickAwayListener>
+    </TooltipButton>
   );
 };
