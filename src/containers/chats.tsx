@@ -5,7 +5,7 @@ import NavItem from "../components/navItem";
 import NewIcon from "../assets/icons/new.svg?react";
 import { TAB1_TYPE } from "../store/tabsSlice";
 import { VerticalMoreButton } from "../components/tooltipOptionsButtons";
-import SearchBox from "./searchBox";
+import ChatSearchBox from "./chatSearchBox";
 import { setLogoutModal } from "../store/authSlice";
 
 const ChatsHeader = () => {
@@ -61,9 +61,7 @@ const Chats = () => {
     <Box component='div' className='h-full'>
       <ChatsHeader />
 
-      <Box component='div'>
-        <SearchBox />
-      </Box>
+      <ChatSearchBox />
     </Box>
   );
 };

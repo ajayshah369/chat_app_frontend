@@ -9,9 +9,6 @@ import { Box, InputBase } from "@mui/material";
 import CrossIcon from "../assets/icons/cross.svg?react";
 import SearchIcon from "../assets/icons/search.svg?react";
 import BackArrowIcon from "../assets/icons/backArrow.svg?react";
-import { Filter } from "../components/tooltipOptionsButtons";
-import UnreadChatsIcon from "../assets/icons/unreadChats.svg?react";
-import GroupIcon from "../assets/icons/group.svg?react";
 
 type SearchInputProps = {
   setFocused: React.Dispatch<React.SetStateAction<boolean>>;
@@ -176,47 +173,31 @@ const SearchBox = () => {
   return (
     <Box
       component='div'
+      className='flex-grow flex items-center px-1'
+      bgcolor='secondary.main'
       style={{
-        height: "50px",
-        marginLeft: "12px",
+        borderRadius: "8px",
+        overflow: "hidden",
+        height: "35px",
       }}
-      className='flex items-center'
     >
-      <Box
-        component='div'
-        className='flex-grow flex items-center px-1'
-        bgcolor='secondary.main'
-        style={{
-          borderRadius: "8px",
-          overflow: "hidden",
-          height: "35px",
-        }}
-      >
-        <LeftOfSearchInput
-          focused={focused}
-          handleFocus={handleFocus}
-          setText={setText}
-        />
+      <LeftOfSearchInput
+        focused={focused}
+        handleFocus={handleFocus}
+        setText={setText}
+      />
 
-        <SearchInput
-          setFocused={setFocused}
-          setText={setText}
-          text={text}
-          ref={childRef}
-        />
+      <SearchInput
+        setFocused={setFocused}
+        setText={setText}
+        text={text}
+        ref={childRef}
+      />
 
-        <RightOfSearchInput
-          text={text}
-          setText={setText}
-          handleFocus={handleFocus}
-        />
-      </Box>
-
-      <Filter
-        list={[
-          { text: "Unread chats", Icon: UnreadChatsIcon },
-          { text: "Groups", Icon: GroupIcon },
-        ]}
+      <RightOfSearchInput
+        text={text}
+        setText={setText}
+        handleFocus={handleFocus}
       />
     </Box>
   );
