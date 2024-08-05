@@ -1,5 +1,6 @@
 import React, {
   forwardRef,
+  useEffect,
   useImperativeHandle,
   useRef,
   useState,
@@ -9,9 +10,12 @@ import { Box, InputBase } from "@mui/material";
 import CrossIcon from "../assets/icons/cross.svg?react";
 import SearchIcon from "../assets/icons/search.svg?react";
 import BackArrowIcon from "../assets/icons/backArrow.svg?react";
+import Spinner from "../components/spinner";
 
-type SearchProps = {
+type SearchBoxProps = {
   placeholder?: string;
+  loading?: boolean;
+  setSearchText?: React.Dispatch<React.SetStateAction<string>>;
 };
 
 type SearchInputProps = {
@@ -31,6 +35,7 @@ type RightOfSearchInputType = {
   text: string;
   setText: React.Dispatch<React.SetStateAction<string>>;
   handleFocus: () => void;
+  loading?: boolean;
 };
 
 const LeftOfSearchInput = ({
@@ -139,6 +144,7 @@ const RightOfSearchInput = ({
   text,
   setText,
   handleFocus,
+  loading,
 }: RightOfSearchInputType) => {
   return (
     <Box
@@ -150,7 +156,9 @@ const RightOfSearchInput = ({
         color: "icon.dark",
       }}
     >
-      {text ? (
+      {loading ? (
+        <Spinner size={16} color='primary.light' />
+      ) : text ? (
         <CrossIcon
           className='cursor-pointer'
           onClick={() => {
@@ -163,7 +171,7 @@ const RightOfSearchInput = ({
   );
 };
 
-const SearchBox = ({ placeholder }: SearchProps) => {
+const SearchBox = ({ placeholder, loading, setSearchText }: SearchBoxProps) => {
   const [focused, setFocused] = useState<boolean>(false);
   const [text, setText] = useState<string>("");
 
@@ -174,6 +182,19 @@ const SearchBox = ({ placeholder }: SearchProps) => {
       childRef.current.focus();
     }
   };
+
+  const timeOutRef = useRef<number>();
+
+  useEffect(() => {
+    if (timeOutRef.current) {
+      clearTimeout(timeOutRef.current);
+    }
+
+    timeOutRef.current = setTimeout(() => {
+      setSearchText?.(text);
+    }, 200);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [text]);
 
   return (
     <Box
@@ -204,6 +225,7 @@ const SearchBox = ({ placeholder }: SearchProps) => {
         text={text}
         setText={setText}
         handleFocus={handleFocus}
+        loading={loading}
       />
     </Box>
   );
