@@ -8,12 +8,12 @@ export enum TAB1_TYPE {
   NEW_CHAT = "newChat",
 }
 
-enum TAB2_TYPE {
+export enum TAB2_TYPE {
   CHAT = "chat",
 }
 
 type State = {
-  activeTab1: TAB1_TYPE;
+  activeTab1?: TAB1_TYPE;
   activeTab2?: TAB2_TYPE;
 };
 

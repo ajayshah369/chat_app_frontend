@@ -10,10 +10,15 @@ import CrossIcon from "../assets/icons/cross.svg?react";
 import SearchIcon from "../assets/icons/search.svg?react";
 import BackArrowIcon from "../assets/icons/backArrow.svg?react";
 
+type SearchProps = {
+  placeholder?: string;
+};
+
 type SearchInputProps = {
   setFocused: React.Dispatch<React.SetStateAction<boolean>>;
   setText: React.Dispatch<React.SetStateAction<string>>;
   text: string;
+  placeholder?: string;
 };
 
 type LeftOfSearchInputType = {
@@ -82,7 +87,7 @@ const LeftOfSearchInput = ({
 };
 
 const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
-  ({ setFocused, setText, text }, ref) => {
+  ({ setFocused, setText, text, placeholder }, ref) => {
     const localRef = useRef<HTMLInputElement>(null);
 
     useImperativeHandle(ref, () => ({
@@ -97,7 +102,7 @@ const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
         <InputBase
           inputRef={localRef}
           fullWidth
-          placeholder='Search'
+          placeholder={placeholder ? placeholder : "Search"}
           size='small'
           sx={{
             fontWeight: 300,
@@ -158,7 +163,7 @@ const RightOfSearchInput = ({
   );
 };
 
-const SearchBox = () => {
+const SearchBox = ({ placeholder }: SearchProps) => {
   const [focused, setFocused] = useState<boolean>(false);
   const [text, setText] = useState<string>("");
 
@@ -192,6 +197,7 @@ const SearchBox = () => {
         setText={setText}
         text={text}
         ref={childRef}
+        placeholder={placeholder}
       />
 
       <RightOfSearchInput

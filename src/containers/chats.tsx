@@ -5,8 +5,11 @@ import NavItem from "../components/navItem";
 import NewIcon from "../assets/icons/new.svg?react";
 import { TAB1_TYPE } from "../store/tabsSlice";
 import { VerticalMoreButton } from "../components/tooltipOptionsButtons";
-import ChatSearchBox from "./chatSearchBox";
 import { setLogoutModal } from "../store/authSlice";
+import { Filter } from "../components/tooltipOptionsButtons";
+import UnreadChatsIcon from "../assets/icons/unreadChats.svg?react";
+import GroupIcon from "../assets/icons/group.svg?react";
+import SearchBox from "./searchBox";
 
 const ChatsHeader = () => {
   const dispatch = useDispatch();
@@ -52,6 +55,28 @@ const ChatsHeader = () => {
           ]}
         />
       </Box>
+    </Box>
+  );
+};
+
+const ChatSearchBox = () => {
+  return (
+    <Box
+      component='div'
+      style={{
+        height: "50px",
+        marginLeft: "12px",
+      }}
+      className='flex items-center'
+    >
+      <SearchBox />
+
+      <Filter
+        list={[
+          { text: "Unread chats", Icon: UnreadChatsIcon },
+          { text: "Groups", Icon: GroupIcon },
+        ]}
+      />
     </Box>
   );
 };
