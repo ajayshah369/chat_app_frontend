@@ -8,7 +8,7 @@ const IntroPage = () => {
     <Box
       component='div'
       bgcolor='secondary.contrastText'
-      className='flex justify-center items-center py-7 relative'
+      className='h-full flex justify-center items-center py-7 relative'
     >
       <Box
         component='div'

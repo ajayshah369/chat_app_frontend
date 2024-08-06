@@ -105,6 +105,7 @@ const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
     return (
       <Box component='div' className='flex-grow'>
         <InputBase
+          name='Search'
           inputRef={localRef}
           fullWidth
           placeholder={placeholder ? placeholder : "Search"}
