@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface ChatType {
+export interface ChatType {
   uuid: string;
   title?: string | null;
   name?: string | null;
