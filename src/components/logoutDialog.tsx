@@ -36,7 +36,7 @@ const LogoutDialog = () => {
           setSnackbar({
             open: true,
             severity: "success",
-            message: res.data.message ?? "Successfully logout!",
+            message: res.data.message,
           })
         );
         resetAll();
@@ -46,7 +46,7 @@ const LogoutDialog = () => {
           setSnackbar({
             open: true,
             severity: "error",
-            message: err?.response?.data?.message ?? "Something went wrong!",
+            message: err?.response?.data?.message,
           })
         );
       })

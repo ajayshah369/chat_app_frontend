@@ -3,28 +3,24 @@ import { AlertPropsColorOverrides, AlertColor } from "@mui/material";
 import { OverridableStringUnion } from "@mui/types";
 
 interface Interface {
-  message?: string | null;
+  message?: string;
   autoHideDuration?: number;
   open?: boolean;
-  severity?:
-    | OverridableStringUnion<AlertColor, AlertPropsColorOverrides>
-    | undefined;
+  severity: OverridableStringUnion<AlertColor, AlertPropsColorOverrides>;
 }
 
 type State = {
   message: string | null;
   autoHideDuration: number;
   open: boolean;
-  severity:
-    | OverridableStringUnion<AlertColor, AlertPropsColorOverrides>
-    | undefined;
+  severity: OverridableStringUnion<AlertColor, AlertPropsColorOverrides>;
 };
 
 const initialState: State = {
   message: null,
   autoHideDuration: 3000,
   open: false,
-  severity: undefined,
+  severity: "warning",
 };
 
 const snackbarSlice = createSlice({

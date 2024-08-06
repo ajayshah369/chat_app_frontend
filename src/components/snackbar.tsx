@@ -12,6 +12,27 @@ const SnackbarComponent = () => {
     dispatch(resetSnackbar());
   };
 
+  let message: string | null = snackbar.message;
+
+  if (!message) {
+    switch (snackbar.severity) {
+      case "error":
+        message = "Something went wrong!";
+        break;
+      case "success":
+        message = "Success!";
+        break;
+      case "warning":
+        message = "Warning!";
+        break;
+      case "info":
+        message = "Info!";
+        break;
+      default:
+        break;
+    }
+  }
+
   return (
     <Snackbar
       open={snackbar.open}
@@ -23,7 +44,7 @@ const SnackbarComponent = () => {
         variant='standard'
         severity={snackbar.severity}
       >
-        {snackbar.message}
+        {message}
       </Alert>
     </Snackbar>
   );

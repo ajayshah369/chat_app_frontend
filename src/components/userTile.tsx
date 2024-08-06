@@ -1,8 +1,12 @@
 import { Box, Avatar, Typography } from "@mui/material";
+import { useDispatch } from "react-redux";
 
+import axiosInstance from "../utilities/axiosInstance";
 import ProfileIcon from "../assets/icons/profile.svg?react";
+import { set as setSnackbar } from "../store/snackbarSlice";
 
 type UserType = {
+  uuid?: string;
   name?: string;
   email?: string;
 };
@@ -12,6 +16,23 @@ type UserTilePropsType = {
 };
 
 const UserTile = ({ data }: UserTilePropsType) => {
+  const dispatch = useDispatch();
+
+  const getOrCreateChat = () => {
+    axiosInstance
+      .get(`/chats/getOrCreateChat/${data.uuid}`)
+      .then(() => {})
+      .catch((err) => {
+        dispatch(
+          setSnackbar({
+            open: true,
+            severity: "error",
+            message: err?.response?.data?.message,
+          })
+        );
+      });
+  };
+
   return (
     <Box
       component='div'
@@ -22,6 +43,7 @@ const UserTile = ({ data }: UserTilePropsType) => {
         },
       }}
       className='flex items-center cursor-pointer'
+      onClick={getOrCreateChat}
     >
       <Box
         component='div'

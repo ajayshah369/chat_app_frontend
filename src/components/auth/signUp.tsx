@@ -50,7 +50,7 @@ const SignUp = () => {
 
         dispatch(
           setSnackbar({
-            message: res?.data?.message ?? "Success!",
+            message: res?.data?.message,
             open: true,
             severity: "success",
             autoHideDuration: 1000,
@@ -60,7 +60,7 @@ const SignUp = () => {
       .catch((err) => {
         dispatch(
           setSnackbar({
-            message: err?.response?.data?.message ?? "Something went wrong!",
+            message: err?.response?.data?.message,
             open: true,
             severity: "error",
             autoHideDuration: 1000,

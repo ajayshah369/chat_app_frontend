@@ -30,7 +30,7 @@ const AuthLoading = () => {
 
         dispatch(
           setSnackbar({
-            message: err?.response?.data?.message ?? "Something went wrong!",
+            message: err?.response?.data?.message,
             open: true,
             severity: "error",
             autoHideDuration: 1000,
