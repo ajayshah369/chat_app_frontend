@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import axiosInstance from "../utilities/axiosInstance";
 import ProfileIcon from "../assets/icons/profile.svg?react";
 import { set as setSnackbar } from "../store/snackbarSlice";
+import { setActiveChat } from "../store/chatsSlice";
+import { set as setTabs, TAB1_TYPE, TAB2_TYPE } from "../store/tabsSlice";
 
 type UserType = {
   uuid?: string;
@@ -21,7 +23,12 @@ const UserTile = ({ data }: UserTilePropsType) => {
   const getOrCreateChat = () => {
     axiosInstance
       .get(`/chats/getOrCreateChat/${data.uuid}`)
-      .then(() => {})
+      .then((res) => {
+        dispatch(setActiveChat(res.data.data));
+        dispatch(
+          setTabs({ activeTab1: TAB1_TYPE.CHATS, activeTab2: TAB2_TYPE.CHAT })
+        );
+      })
       .catch((err) => {
         dispatch(
           setSnackbar({
