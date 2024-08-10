@@ -19,7 +19,7 @@ const ChatHeader = ({ chat }: ChatHeaderPropsType) => {
         bgcolor: "secondary.main",
       }}
       style={{
-        boxShadow: "0 1px 3px rgba(11, 20, 26, .4);",
+        boxShadow: "0 1px 3px rgba(11, 20, 26, .4)",
       }}
       className='flex items-center'
     >
@@ -70,6 +70,19 @@ const ChatHeader = ({ chat }: ChatHeaderPropsType) => {
   );
 };
 
+const ChatBottom = () => {
+  return (
+    <Box
+      component='footer'
+      sx={{
+        padding: "5px 16px",
+        bgcolor: "secondary.main",
+        height: "66px",
+      }}
+    ></Box>
+  );
+};
+
 const Chat = () => {
   const chat = useSelector((state: RootState) => state.chats.activeChat);
 
@@ -80,6 +93,15 @@ const Chat = () => {
   return (
     <Box component='div' className='h-full'>
       <ChatHeader chat={chat} />
+
+      <Box
+        component='main'
+        style={{
+          height: "calc(100% - 60px - 66px)",
+        }}
+      ></Box>
+
+      <ChatBottom />
     </Box>
   );
 };
